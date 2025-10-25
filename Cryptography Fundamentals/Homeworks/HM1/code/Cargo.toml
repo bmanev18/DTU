@@ -1,0 +1,9 @@
+[package]
+name = "code"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+aes = { version = "0.8", default-features = false }
+rand = { version = "0.9", default-features = false, features = ["thread_rng"] }
+thiserror = { version = "2", default-features = false }
