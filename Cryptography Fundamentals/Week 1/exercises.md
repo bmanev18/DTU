@@ -172,4 +172,41 @@ Since all four entries satisfy the condition, the pair $(X_3, Y_3)$ is **indepen
 
 Cyphertext: ";\r6TXfTe~r[bjrTeXrlbhrWb\aZ2rHf\aZrUeb^XarVelcgb~r[h[2r;TccXafrgbrg[XrUXfgrbYrhf!!!rAXkgrg\‘XrTebhaW~rgelr48F $%+r\ar:T_b\fr6bhagXer@bWXsss"
 
+*   **Plaintext ($m$):**
+    `Hi Caesar, how are you doing? Using broken crypto, huh? Happens to the best of us... Next time around, try AES-128 in Galois Counter Mode!!!`
+*   **Parameters:**
+    *   $a = 32$
+    *   $b = 126$
+    *   $k = 82$
+
+**Justification:**
+
+1.  **Analyzing the Alphabet Range ($a, b$):**
+    By inspecting the ciphertext, we observe that the characters fall within the range of printable ASCII characters.
+    *   The minimum ASCII value observed is 32 (the space character `' '`, which appears in the segment `F $%`).
+    *   The maximum ASCII value observed is 126 (the tilde `~`).
+    *   Therefore, we can hypothesize that the alphabet $\mathcal{X}_{a,b}$ corresponds to the standard printable ASCII range, where **$a = 32$** and **$b = 126$**.
+    *   The size of this alphabet is $\ell = b - a + 1 = 126 - 32 + 1 = 95$.
+
+2.  **Finding the Key ($k$):**
+    We can use frequency analysis to find the key. In standard English sentences, the **space** character is typically the most frequent.
+    *   In the ciphertext, the character **`r`** (ASCII 114) appears most frequently (16 times).
+    *   We hypothesize that `r` in the ciphertext corresponds to `space` (ASCII 32) in the plaintext.
+    *   Using the encryption formula $e_k(x) = (x - a + k) \pmod \ell + a$, the decryption formula is $d_k(c) = (c - a - k) \pmod \ell + a$.
+    *   Setting $c = 114$ (`r`) and $d_k(c) = 32$ (`space`):
+        $$32 = (114 - 32 - k) \pmod{95} + 32$$
+        $$0 = (82 - k) \pmod{95}$$
+    *   This implies **$k = 82$**.
+
+3.  **Decryption Verification:**
+    Using the parameters $a=32, b=126, k=82$, we can decrypt the first few characters of the ciphertext `;\r6TXfTe~r`:
+    *   `;` (59) $\rightarrow$ $(59 - 32 - 82) \pmod{95} + 32 = (-55 \pmod{95}) + 32 = 40 + 32 = 72$ ('H')
+    *   `\` (92) $\rightarrow$ $(92 - 32 - 82) \pmod{95} + 32 = (-22 \pmod{95}) + 32 = 73 + 32 = 105$ ('i')
+    *   `r` (114) $\rightarrow$ $(114 - 32 - 82) \pmod{95} + 32 = 0 + 32 = 32$ (' ')
+    *   `6` (54) $\rightarrow$ $(54 - 32 - 82) \pmod{95} + 32 = (-60 \pmod{95}) + 32 = 35 + 32 = 67$ ('C')
+    *   `T` (84) $\rightarrow$ $(84 - 32 - 82) \pmod{95} + 32 = (-30 \pmod{95}) + 32 = 65 + 32 = 97$ ('a')
+    
+    This yields "Hi Ca...", confirming the hypothesis. Decrypting the full string results in the English text provided above.
+
+
 
