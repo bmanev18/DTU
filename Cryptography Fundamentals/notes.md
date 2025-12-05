@@ -43,7 +43,9 @@ Let $L_1, L_2, L_3, L$ be libraries.
 2. If $L_1 \approx L_2$ and $L_2 \approx L_3$ then $L_1 \approx L_3$
 3. If $L_1 \approx L_2$ and $L$ runs in polynomial time, then $L \circ L_1 \approx L \circ L_2$
 
-## Pseudorandom Functions
+## Pseudorandomness
+
+### Pseudorandom Functions
 
 A deterministic function $F: \{0,1\}^{\lambda} \times \{0,1\}^{in} \rightarrow \{0,1\}^{out}$ is a Pseudorandom function if $L_{PRF-real}^F \approx L_{PRF-rand}^F$ where:
 
@@ -67,7 +69,7 @@ graph TD
 - Not injective
 - Not efficiently invertible
 
-## Pseudorandom Permutations
+### Pseudorandom Permutations
 A deterministic function $F: \{0,1\}^{\lambda} \times \{0,1\}^{B} \rightarrow \{0,1\}^{B}$ is a Pseudorandom permutation if
 
 1. There is an efficient function $F^{-1}: \{0,1\}^{\lambda} \times \{0,1\}^{B} \rightarrow \{0,1\}^{B}$ such that $\forall k \in \{0,1\}^{\lambda}, \forall x \in \{0,1\}^{B}: F^{-1}(k, (F(k,x))) = x$
@@ -89,6 +91,29 @@ graph TD
     %% Apply the styles
     class Real,Rand blueBox;
 ```
+
+### PRP-PRF Switching Lemma
+
+> Lemma (PRP-PRF switching): <br>
+Let $𝑃$ be a $PRP$ and $𝐹$ be a $PRF$ with security parameter $\lambda$, both with $l_{in} = l_{out} = \lambda$. Then the libraries $L^{F}_{PRF-real}$ and $L^{F}_{PRP-real}$ are computationally
+indistinguishable
+
+### Constructing PRPs from PRFs
+Turn *PRF* $F:\{0, 1\}^\lambda \times \{0, 1\}^{in} \rarr \{0, 1\}^{out}$ into *PRP* $F':\{0, 1\}^\lambda \times \{0, 1\}^{B} \rarr \{0, 1\}^{B}$ 
+
+Idea: 
+$\boxed{F'(k, m) = F(k, m) \oplus m}$ 
+
+## Birthday Paradox
+
+𝐵𝑖𝑟𝑡ℎ𝑑𝑎𝑦𝑃𝑟𝑜𝑏 $(𝑞, 𝑁)$ is the probability that, when sampling $𝑞$
+elements from a set of size $𝑁$ (with replacement) we find a collision
+
+$$
+    𝐵𝑖𝑟𝑡ℎ𝑑𝑎𝑦𝑃𝑟𝑜𝑏 (𝑞, 𝑁) = 1 - \prod^{q - 1}_{i = 1}{(1 - \frac{i}{N})}
+$$
+
+
 
 ### IND-CPA & IND-CCA Security
 
@@ -169,6 +194,13 @@ graph TD
     class Real,Ideal blueBox;
     class MiddleText textField;
 ```
+## Disadvantages of Symmetric Cryptography
+- The chicken-and-egg problem
+  - You need a shared key $k$k to establish a secure channel
+  - You need a secure channel to share the key $k$
+- Scalability problems:
+  -  A network of $n$ users needs $n(n-1)/2$ exchanged keys $\implies O(n^2)$ for $n$ nodes
+  - Or you use a single network-wide key. If one node gets compromised, whole network get compromised
 
 ## Kerchhoff's Principle
 
