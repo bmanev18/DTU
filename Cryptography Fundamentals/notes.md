@@ -327,16 +327,15 @@ graph TD
 ```
  
 #### Proof
-Trivial: For every 𝑚 ∈ 𝑀, 𝑐 ∈ 𝐶 $L_{OTS\$-Rand}$ outputs 𝑐
-with probability 1/|𝐶|.
+Trivial: For every $𝑚 \in 𝑀$, $𝑐 \in 𝐶$,  $L_{OTS\$-Rand}$ outputs $𝑐$ with probability $1/|𝐶|$.
+
 Want to show:
-For every 𝑚 ∈ 𝑀, 𝑐 ∈ 𝐶:
-Pr 𝑐 = 𝐸𝑛𝑐(𝑘, 𝑚) 𝑘 ← 𝐾𝑒𝑦𝑔𝑒𝑛() = 1/|𝐶|
+For every $𝑚 \in 𝑀$, $𝑐 \in 𝐶$: $Pr[c = Enc(k, m)]$ where $k \leftarrow Keygen() = 1/|𝐶|$
+
 Proof:
-1. If 𝑐 = 𝐸𝑛𝑐 𝑘, 𝑚 = 𝑘 ⊕ 𝑚 then 𝑘 = 𝑐 ⊕ 𝑚
-2. Since 𝐾𝑒𝑦𝑔𝑒𝑛() chooses* uniformly at random from 𝐾,
-its output agrees with 𝑘 with probability 1/|𝐾|.
-𝐾 = 𝐶, so the result follows.
+1. If $c = Enc(k, m) = k \oplus m$ then $k = c \oplus m$
+2. Since $Keygen()$ chooses* uniformly at random from $K$, its output agrees with $k$ with probability $1/|K|$.
+$K = C$, so the result follows.
 
 No matter the choice of 𝑚, every ciphertext 𝑐 will be
 equally likely no matter if it's $L_{OTS\$-Real}$ or $L_{OTS\$-Rand}$.
