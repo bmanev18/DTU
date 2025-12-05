@@ -280,18 +280,6 @@ $m, c \in \{0, \dots, 25\}^{\lambda \cdot r} \\ k \in \{0, \dots, 25\}^\lambda$
 
 ## One-Time Pad (*OTP*)
 
-𝑀 = 𝐶 = 𝐾 = 0,1 !
-Keygen():
-1. Sample 𝒌 ← 𝐾
-2. Output 𝒌
-Enc(𝒌, 𝒎):
-1. Output the coordinate-wise operation 𝒌 ⊕ 𝒎
-Dec 𝒌, 𝒄 :
-1. Output the coordinate-wise operation 𝒌 ⊕ 𝒄
-Correctness: 𝐷𝑒𝑐 𝒌, 𝐸𝑛𝑐 𝒌, 𝒎 = 𝒌 ⊕ 𝒌 ⊕ 𝒎 = 𝒌 ⊕ 𝒌 ⊕ 𝒎 = 𝟎 ⊕ 𝒎 = 𝒎
-
-$M = C = K = \{0,1\}^\lambda$
-
 $Keygen()$:
 1. Sample $k \larr \{0,1\}^\lambda$
 2. Output $k$
