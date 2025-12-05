@@ -34,28 +34,41 @@ $3DES.Dec(k, c)$:
 
 **1. Write down the Lookup functions in the libraries $L^G_{PRF-Real}$ and $L^G_{PRF-Rand}$.**
 
-*   **$L^G_{PRF-Real}$**: This library holds the secret key $k$.
-    ```text
-    Oracle Lookup(x):
-        y_raw = F(k, x)
-        y = y_raw XOR r
-        return y
-    ```
-
+*   **$L^G_{PRF-Real}$**: This library holds the secret key $k$.*   
 *   **$L^G_{PRF-Rand}$**: This library implements a truly random function. It maintains a table $T$ to ensure consistency (if the same $x$ is queried twice, the same $y$ is returned).
-    ```text
-    Oracle Lookup(x):
-        If x is in T:
-            return T[x]
-        Else:
-            y <- {0, 1}^out  // Sample uniformly at random
-            T[x] = y
-            return y
-    ```
+
+```math
+\begin{array}{l | l}
+  % HEADERS
+  \underline{\mathcal{L}^G_{\text{PRF-real}}} & \underline{\mathcal{L}^G_{\text{PRF-rand}}} \\[1em]
+  
+  % INITIALIZATION
+  k \leftarrow \mathcal{K} & T = [\ ] \\[0.5em]
+  
+  % ORACLE DEFINITION
+  \text{Lookup}(x \in \{0,1\}^{\text{in}}): & \text{Lookup}(x \in \{0,1\}^{\text{in}}): \\[0.5em]
+  
+  % LOGIC STEPS
+  \quad 1.\ y \leftarrow G(k, x) & \quad 1.\ \text{If } T[x] \text{ is undefined} \\
+  \quad 2.\ \text{output } y & \quad \quad \text{then } T[x] \leftarrow \{0,1\}^{\text{out}} \\
+                             & \quad 2.\ \text{output } T[x]
+\end{array}
+```
+
 
 **2. Find a way to rewrite $L^G_{PRF-Real}$ into another library $\overline{L}^G_{PRF-Real}$ which uses $L^F_{PRF-Real}$.**
 
 We can construct a library that acts as a "wrapper" around the oracle provided by the underlying PRF $F$. Let's call the oracle provided by the sub-library $\mathcal{O}_F$.
+
+```math
+    L^G_{PRF-Real} \equiv \underline{\overline{\mathcal{L}}^G_{\text{PRF-real}}} \circ \mathcal{L}^F_{\text{PRF-real}} \\
+\begin{array}{l}
+    k \leftarrow \mathcal{K} \\
+    1. y \leftarrow \text{Lookup}(x): \\
+    2. y' \leftarrow y \oplus r \\
+    3. \text{output } y'
+\end{array}
+```
 
 *   **$\overline{L}^G_{PRF-Real}$**:
     ```text
@@ -80,6 +93,10 @@ Since $F$ is a secure PRF, the library $L^F_{PRF-Real}$ is computationally indis
         return y
     ```
     *Justification:* Because $L^F_{PRF-Real} \approx L^F_{PRF-Rand}$, any adversary distinguishing $\overline{L}^G_{PRF-Real}$ from $L^{Hybrid}$ could be used to distinguish $F$ from a random function. Since $F$ is a PRF, this is impossible (negligible probability).
+
+$$
+    L^G_{PRF-Real} \equiv \overline{\mathcal{L}}^G_{\text{PRF-real}} \circ \mathcal{L}^F_{\text{PRF-real}} \equiv \overline{\mathcal{L}}^G_{\text{PRF-real}} \circ \mathcal{L}^F_{\text{PRF-rand}} \equiv L^{Hybrid}
+$$
 
 **4. Find an argument how to complete indistinguishability of the resulting library with $L^G_{PRF-Rand}$.**
 
