@@ -13,7 +13,12 @@ An attack requires four elements: a threat exploits a vulnerability, providing a
 
 - **Threat Classes**: Disclosure (unauthorized access), Deception (acceptance of false data), Disruption (interruption, DoS), and Usurpation (unauthorized control).
 - **Attackers & Motives**: Attackers range from Insiders (who account for >50% of the threat and know system topology) to external agents like Crackers/Hackers, Script-Kiddies, Spies, Criminals, and Hacktivists/Terrorists. Motivations include financial gain, curiosity, fame, and ideology. Spies and Criminals commonly rely on non-technical means like Beatings, Bribery, and Blackmail ("3 Bs").
-- **Response Strategies**: Prevention (stopping attacks before they succeed), Deterrence (discouraging attackers via high risk or effort), Deflection (diverting attackers to false targets), Detection (identifying attacks as they happen), and Recovery (restoring systems after an incident).
+- **Response Strategies**: 
+  * **Prevention** - stopping attacks before they succeed
+  * **Deterrence** - discouraging attackers via high risk or effort
+  * **Deflection** - diverting attackers to false targets
+  * **Detection** - identifying attacks as they happen
+  * **Recovery** - restoring systems after an incident
 
 # Security Administration and Risk Management
 
@@ -35,6 +40,11 @@ Security Administration is based on Security Planning, Policy Definition/Enforce
 Physical controls protect against environmental threats, disasters, and human interference.
 
 - **Availability Measures**: Uninterruptible Power Supplies (UPS) allow clean shutdowns, complemented by backup generators. Surge suppressors protect equipment from electrical variations. Dependability for data centers is measured in Tiers (Tier I: single, non-redundant path; Tier IV: multiple active paths, compartmentalization, continuous cooling, autonomy against single faults).
+  *   **Tier I (Basic Capacity):** Single path for power and cooling, no redundant components. (Expected availability: 99.671%)
+  *   **Tier II (Redundant Components):** Still a single path, but has backup components (like an extra generator or cooling unit) so things don't fail immediately if one piece breaks. (Expected availability: 99.741%)
+  *   **Tier III (Concurrently Maintainable):** Multiple paths for power and cooling. You can shut down one path for maintenance without shutting down the servers. (Expected availability: 99.982%)
+  *   **Tier IV (Fault Tolerant):** Multiple active paths. The system can withstand a major fault (like a fire or total power cut to one side) without any impact on operations. (Expected availability: 99.995%)
+
 - **Data Security**: Physical media containing sensitive information (paper, hard disks) must be properly disposed of via shredding, overwriting, or physical destruction (smashing/burning) to prevent interception.
 
 # Authentication and Access Control
@@ -103,7 +113,14 @@ Networks are defined by boundaries, ownership (Autonomous Systems/Administrative
 ## Social Engineering
 Social engineering is the non-technical act of manipulating users to compromise security.
 
-- **Principles of Manipulation**: Authority, Intimidation, Urgency, Scarcity, Familiarity, Consensus, and Trust.
+- **Principles of Manipulation**:
+  *   **Authority:** - Exploiting respect for status, rank, or position to command obedience.
+  *   **Intimidation:** - Using fear, threats, or aggression to force compliance.
+  *   **Urgency:** - Creating a false time constraint to bypass critical thinking.
+  *   **Scarcity:** - Leveraging the fear of missing out on a limited resource.
+  *   **Familiarity:** - Building rapport, likeness, or a bond to lower defenses.
+  *   **Consensus:** - Claiming that "everyone else is doing it" to validate the action.
+  *   **Trust:** Establishing credibility or a false sense of safety to deceive.
 - **Attack Methods (Online/Offline)**:
     - **Phishing/Spear Phishing/Whaling**: Using mass emails, or highly targeted, tailored messages (Whaling targets high-value individuals like CEOs) to extract sensitive information.
     - **Smishing/Vishing**: Phishing via text message (SMS) or voice communication, often exploiting urgency or spoofing legitimate numbers.
@@ -127,3 +144,7 @@ Malicious software designed to cause harm or grant unauthorized access.
 - **Trusted Platform Module (TPM)**: A secure processor (hardware) supporting cryptographic operations and tamper-resistant storage for keys and measurements. TPM uses Platform Configuration Registers (PCRs) to securely hash and verify software components during a trusted/secure boot process.
 - **Zero-Knowledge Proofs (ZKP)**: Cryptographic protocols allowing a prover (Peggy) to convince a verifier (Victor) that she knows a secret or a property without revealing any information beyond the validity of the statement itself. ZKPs are used in anonymous credential systems (e.g., IBM's Idemix) and voting protocols.
 - **Digital Fitness**: Users must cultivate "digital fitness," stressing awareness and caution, particularly when dealing with digital links, communication methods, and maintaining good security practices.
+
+
+TODO:
+network security architectures - Security architecture is the high-level plan that combines technology (firewalls, segmentation) with rules (policies) to meet business security goals. 
